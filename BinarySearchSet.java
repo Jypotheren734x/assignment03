@@ -52,16 +52,14 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 	public boolean add(E element) {
 		// TODO Auto-generated method stub
 		if (isEmpty()) {
-			E[] temp = (E[]) new Object[size + 1];
-			temp[0] = (E) element;
-			arr = temp;
+			arr[0] = element;
 			size++;
 			return true;
 		}
 		if (contains(element) == true) {
 			return false;
 		}
-		int index = binarySearch(element);
+		int index = binarySearch(element, arr);
 		E[] temp = (E[]) new Object[size + 1];
 		for (int i = 0; i < index; i++) {
 			temp[i] = arr[i];
@@ -75,6 +73,7 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean addAll(Collection<? extends E> elements) {
 		// TODO Auto-generated method stub
@@ -98,36 +97,37 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 		if (isEmpty()) {
 			return false;
 		}
-		if (arr[0] == element || binarySearch((E) element) < 0) {
+		if (arr[0] == element || binarySearch((E) element, arr) < 0) {
 			return true;
 		}
 		return false;
 	}
 
-	public int binarySearch(E element) {
+	@SuppressWarnings("unchecked")
+	public int binarySearch(E element, E[] array) {
 		int low = 0;
 		int high = size - 1;
 		while (high >= low) {
 			int middle = (low + high) / 2;
 			if (c != null) {
-				if (arr[middle] == element) {
+				if (array[middle] == element) {
 					return -middle;
 				}
-				else if (c.compare((E) element, arr[middle]) < 0) {
+				else if (c.compare((E) element, array[middle]) < 0) {
 					low = middle - 1;
 				}
-				else if (c.compare((E) element, arr[middle]) > 0) {
+				else if (c.compare((E) element, array[middle]) > 0) {
 					high = middle + 1;
 				}
 			}
 			else {
-				if (arr[middle] == element) {
+				if (array[middle] == element) {
 					return -middle;
 				}
-				else if ((((Comparable<? super E>) element).compareTo(arr[middle])) > 0) {
+				else if ((((Comparable<? super E>) element).compareTo(array[middle])) > 0) {
 					low = middle + 1;
 				}
-				else if ((((Comparable<? super E>) element).compareTo(arr[middle])) < 0) {
+				else if ((((Comparable<? super E>) element).compareTo(array[middle])) < 0) {
 					high = middle - 1;
 				}
 			}
@@ -195,7 +195,7 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 		}
 		else {
 			E[] temp = (E[]) new Object[size - 1];
-			int index = -binarySearch((E) element);
+			int index = -binarySearch((E) element, arr);
 			for (int i = 0; i < index; i++) {
 				temp[i] = arr[i];
 			}
