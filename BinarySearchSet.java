@@ -50,7 +50,6 @@ public class BinarySearchSet<E> implements SortedSet<E>{
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean add(E element) {
-
 		if (isEmpty()) {
 			arr[0] = element;
 			size++;
@@ -102,6 +101,13 @@ public class BinarySearchSet<E> implements SortedSet<E>{
 		return false;
 	}
 
+	/**
+	 * binary search helper method with two elements parameters
+	 * 
+	 * @param element, the item that we are looking for in array
+	 * @param array, the input array that we are searching in
+	 * @return the index of array, if duplicate, return negative position
+	 */
 	@SuppressWarnings("unchecked")
 	public int binarySearch(E element, E[] array) {
 		int low = 0;
