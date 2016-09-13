@@ -25,13 +25,13 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 
 	@Override
 	public Comparator<? super E> comparator() {
-		// TODO Auto-generated method stub
+
 		return c;
 	}
 
 	@Override
 	public E first() throws NoSuchElementException {
-		// TODO Auto-generated method stub
+
 		if (isEmpty()) {
 			throw new NoSuchElementException();
 		}
@@ -40,7 +40,7 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 
 	@Override
 	public E last() throws NoSuchElementException {
-		// TODO Auto-generated method stub
+
 		if (isEmpty()) {
 			throw new NoSuchElementException();
 		}
@@ -50,7 +50,7 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean add(E element) {
-		// TODO Auto-generated method stub
+
 		if (isEmpty()) {
 			arr[0] = element;
 			size++;
@@ -76,7 +76,10 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean addAll(Collection<? extends E> elements) {
-		// TODO Auto-generated method stub
+
+		if (elements.isEmpty()) {
+			throw new NullPointerException();
+		}
 		for (E e : elements) {
 			this.add(e);
 		}
@@ -86,14 +89,14 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
+
 		arr = (E[]) new Object[1];
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean contains(Object element) {
-		// TODO Auto-generated method stub
+
 		if (isEmpty()) {
 			return false;
 		}
@@ -137,7 +140,7 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 
 	@Override
 	public boolean containsAll(Collection<?> elements) {
-		// TODO Auto-generated method stub
+
 		for (Object e : elements) {
 			if (contains(e) == false) {
 				return false;
@@ -148,7 +151,7 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
+
 		if (size == 0) {
 			return true;
 		}
@@ -157,7 +160,7 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 
 	@Override
 	public Iterator<E> iterator() {
-		// TODO Auto-generated method stub
+
 		return new Iterator<E>() {
 
 			int index = 0;
@@ -182,6 +185,16 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 			}
 
 			public void remove() {
+				E[] temp = (E[]) new Object[size - 1];
+				int index = -binarySearch(arr[this.index], arr);
+				for (int i = 0; i < index; i++) {
+					temp[i] = arr[i];
+				}
+				for (int i = index + 1; i < arr.length; i++) {
+					temp[i - 1] = arr[i];
+				}
+				arr = temp;
+				size--;
 			}
 		};
 	}
@@ -189,7 +202,9 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean remove(Object element) {
-		// TODO Auto-generated method stub
+		if (isEmpty()) {
+			throw new NullPointerException();
+		}
 		if (contains(element) == false) {
 			return false;
 		}
@@ -210,7 +225,6 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 
 	@Override
 	public boolean removeAll(Collection<?> elements) {
-		// TODO Auto-generated method stub
 		for (Object e : elements) {
 			this.remove(e);
 		}
@@ -219,13 +233,11 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
 		return size;
 	}
 
 	@Override
 	public Object[] toArray() {
-		// TODO Auto-generated method stub
 		return arr;
 	}
 
