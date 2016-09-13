@@ -1,13 +1,13 @@
 package assignment03;
 /**
- * @author Jiwon 
+ * @author Jiwon Nam , Nickolas Komarnitsky
  */
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
+public class BinarySearchSet<E> implements SortedSet<E>{
 
 	E[] arr;
 	int size;
@@ -25,7 +25,6 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 
 	@Override
 	public Comparator<? super E> comparator() {
-
 		return c;
 	}
 
@@ -40,13 +39,14 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 
 	@Override
 	public E last() throws NoSuchElementException {
-
 		if (isEmpty()) {
 			throw new NoSuchElementException();
 		}
 		return arr[size - 1];
 	}
 
+	
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean add(E element) {
@@ -72,8 +72,7 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 		size++;
 		return true;
 	}
-
-	@SuppressWarnings("unchecked")
+	
 	@Override
 	public boolean addAll(Collection<? extends E> elements) {
 
@@ -97,10 +96,7 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 	@Override
 	public boolean contains(Object element) {
 
-		if (isEmpty()) {
-			return false;
-		}
-		if (arr[0] == element || binarySearch((E) element, arr) < 0) {
+		if (!isEmpty() && arr[0] == element || binarySearch((E) element, arr) < 0) {
 			return true;
 		}
 		return false;
@@ -184,6 +180,7 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 				return arr[lastIndex];
 			}
 
+			@SuppressWarnings("unchecked")
 			public void remove() {
 				E[] temp = (E[]) new Object[size - 1];
 				int index = -binarySearch(arr[this.index], arr);
