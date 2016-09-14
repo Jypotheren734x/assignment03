@@ -94,7 +94,6 @@ public class BinarySearchSet<E> implements SortedSet<E>{
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean contains(Object element) {
-
 		if (!isEmpty() && arr[0] == element || binarySearch((E) element, arr) < 0) {
 			return true;
 		}
@@ -104,8 +103,10 @@ public class BinarySearchSet<E> implements SortedSet<E>{
 	/**
 	 * binary search helper method with two elements parameters
 	 * 
-	 * @param element, the item that we are looking for in array
-	 * @param array, the input array that we are searching in
+	 * @param element
+	 * 		-the item that we are looking for in array
+	 * @param array
+	 * 		-the input array that we are searching in
 	 * @return the index of array, if duplicate, return negative position
 	 */
 	@SuppressWarnings("unchecked")
@@ -126,7 +127,7 @@ public class BinarySearchSet<E> implements SortedSet<E>{
 				}
 			}
 			else {
-				if (array[middle] == element) {
+				if ((((Comparable<? super E>) element).compareTo(array[middle])) == 0) {
 					return -middle;
 				}
 				else if ((((Comparable<? super E>) element).compareTo(array[middle])) > 0) {
