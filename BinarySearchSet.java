@@ -89,6 +89,7 @@ public class BinarySearchSet<E> implements SortedSet<E>{
 	public void clear() {
 
 		arr = (E[]) new Object[1];
+		size = 0;
 	}
 
 	@SuppressWarnings("unchecked")
