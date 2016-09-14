@@ -1,5 +1,9 @@
 package assignment03;
-
+/**
+ * JUnit test codes
+ * 
+ * @author Jiwon Nam , Nickolas Komarnitsky
+ */
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
