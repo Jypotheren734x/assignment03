@@ -230,9 +230,14 @@ public class BinarySearchSet<E> implements SortedSet<E>{
 
 	@Override
 	public boolean removeAll(Collection<?> elements) {
+		int count = 0;
 		for (Object e : elements) {
-			this.remove(e);
+			if(remove(e))
+				count++;
 		}
+		if(count != 0)
+			return true;
+		
 		return false;
 	}
 
